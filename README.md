@@ -54,7 +54,7 @@
 - has_one :shipping
 
 
-## shipping テーブル
+## shippings テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
