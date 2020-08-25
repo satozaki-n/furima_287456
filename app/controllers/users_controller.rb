@@ -8,5 +8,4 @@ class UsersController < ApplicationController
     User.create
   end
 
-  private
 end
