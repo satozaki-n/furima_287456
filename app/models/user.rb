@@ -3,19 +3,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+        
+    with_options presence: true do
+      validates :nickname
+      validates :email
+      validates :birthday
+    end
 
-  with_options presence: true do
-    validates :nickname
-    validates :email
-    validates :password, format: { with: /\A[a-zA-Z0-9]+\z/ }
-    validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-    validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-    validates :first_name_kana, format: { with: /\A[\p{katakana} ー－&&[^ -~｡-ﾟ]]+\z/ }
-    validates :last_name_kana, format: { with: /\A[\p{katakana} ー－&&[^ -~｡-ﾟ]]+\z/ }
-    validates :birthday
-  end
+    validates :password, presence: true, format: { with: /\A[a-zA-Z0-9]+\z/ }
 
-  def user
-    @user = User.create(:nickname, :email, :password, :first_name, :last_name, :first_name_kana, :last_name_kana, :birthday)
-  end
+    with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/} do
+      validates :first_name
+      validates :last_name
+    end
+
+    with_options presence: true, format: { with: /\A[\p{katakana} ー－&&[^ -~｡-ﾟ]]+\z/ } do
+      validates :first_name_kana
+      validates :last_name_kana
+    end
 end
