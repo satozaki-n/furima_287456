@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     @user.save
   end
 
+  def destroy
+  end
+
   private
 
   def user_params
