@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     @user.save
   end
 
+  def destroy
+    @user = UserForm.delete
+    @user.destroy
+  end
+
   private
 
   def user_params
