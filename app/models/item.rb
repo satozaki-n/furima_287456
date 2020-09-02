@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   validates :name, :category, :sales_status, :shipping_fee_status, :prefecture, :scheduled_delivery, presence: true
   
   with_options presence: true do 
-    validates :price, format: { with: /^[0-9]+$/ }
+    validates :price, format: { with: /\A^[0-9]+^\z/ }
   end
 
   #プルダウンの選択が「--」の時は保存できないようにする

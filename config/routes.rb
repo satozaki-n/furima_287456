@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :new, :create, :show]
   get 'items/index'
   get 'items/new_item', to: 'items#new'
+  post 'items/new', to: 'items#create'
 
 
 end
