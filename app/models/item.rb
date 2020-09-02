@@ -3,8 +3,12 @@ class Item < ApplicationRecord
 
   #空の投稿を保存できないようにする
   validates :name, :category, :sales_status, :shipping_fee_status, :prefecture, :scheduled_delivery, presence: true
+  
+  with_options presence: true do 
+    validates :price, format: { with: /^[0-9]+$/ }
+  end
 
-  #カテゴリーの選択が「--」の時は保存できないようにする
+  #プルダウンの選択が「--」の時は保存できないようにする
   validates :category_id, numericality: { other_than: 1 }
   validates :sales_status_id, numericality: { other_than: 1 }
   validates :shipping_fee_status_id, numericality: { other_than: 1 }
