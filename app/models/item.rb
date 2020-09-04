@@ -2,18 +2,24 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   #空の投稿を保存できないようにする
-  validates :name, :category, :sales_status, :shipping_fee_status, :prefecture, :scheduled_delivery, presence: true
-  
-  with_options presence: true do 
+  with_options presence: true do
+    validates :name
+    validates :category
+    validates :sales_status
+    validates :shipping_fee_status
+    validates :prefecture
+    validates :scheduled_delivery
     validates :price, format: { with: /\A^[0-9]+^\z/ }
   end
 
   #プルダウンの選択が「--」の時は保存できないようにする
-  validates :category_id, numericality: { other_than: 1 }
-  validates :sales_status_id, numericality: { other_than: 1 }
-  validates :shipping_fee_status_id, numericality: { other_than: 1 }
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :scheduled_delivery_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :sales_status_id
+    validates :shipping_fee_status_id
+    validates :prefecture_id
+    validates :scheduled_delivery_id
+  end
 
   #アソシエーション
   belongs_to :user
