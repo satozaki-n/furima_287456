@@ -71,6 +71,36 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid")
       end
+
+      it '価格が¥300よりも小さい金額の場合出品できない' do
+        @item.price = '200'
+        @item.valid?
+        expect(@item.error.fullmessages).to inculud("Price less than 300 yen is over")
+      end
+
+      it '価格が¥9,999,999より大きい金額の場合出品できない' do
+        @item.price = '9,999,999'
+        @item.valid?
+        expect(@item.error.fullmessages).to inculud("Price greater than 9,999,999 yen is invalid")
+      end
+    end
+    
+    context 'プルダウンの項目で、 id1,name:-- が選択された場合登録できないこと' do
+    
+      it 'カテゴリーで id1,name:-- が選択された場合保存できない' do
+      end
+
+      it '商品の状態で id1,name:-- が選択された場合保存できない' do
+      end
+
+      it '配送料の負担で id1,name:-- が選択された場合保存できない' do
+      end
+
+      it '発送元の地域で id1,name:-- が選択された場合保存できない' do
+      end
+
+      it '発送までの日数で id1,name:-- が選択された場合保存できない' do
+      end
     end
   end
 end
