@@ -9,11 +9,5 @@ FactoryBot.define do
     scheduled_delivery  { '2' }
     price               { '500' }
     association :user
-    association :category
-    association :sales_status
-    association :shipping_fee_status
-    association :prefecture
-    association :scheduled_delivery
-    
   end
 end
