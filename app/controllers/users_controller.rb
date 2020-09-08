@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     @user.save
   end
 
+  def destroy
+    @user = UserForm.find(params[:id])
+    @user.delete
+    redirect_to root_path
+  end
 
   private
 
