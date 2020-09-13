@@ -8,10 +8,6 @@ class UsersController < ApplicationController
     @user.save
   end
 
-  def destroy
-    @user.delete
-    redirect_to root_path
-  end
 
   private
 

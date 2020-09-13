@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @user = current_user.user
   end
 
   private
