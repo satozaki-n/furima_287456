@@ -9,8 +9,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @items = Item.new(item_params)
-    if @items.save
+    @item = Item.new(item_params)
+    if @item.save
       redirect_to root_path
     else
       render :new
@@ -18,8 +18,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @items = Item.find(params[:id])
-    @user = current_user.nickname
+    @item = Item.find(params[:id])
+    @item.current_user.nickname
   end
   private
 
