@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @item = Item.includes(:user)
     @item.current_user.nickname
   end
   private
