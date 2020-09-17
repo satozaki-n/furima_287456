@@ -19,22 +19,7 @@ class ItemsController < ApplicationController
 
   def show
     @items = Item.find(params[:id])
-    @user = current_user.nickname
-  end
-
-  def edit
-    @items = Item.find(params[:id])
-  end
-
-  def update
-    item = Item.find(params[:id])
-    item.update(item_params)
-  end
-
-  def destroy
-    @items = Item.find(params[:id])
-    @items.destroy
-    redirect_to root_path
+    #@user = current_user.user
   end
 
   private
