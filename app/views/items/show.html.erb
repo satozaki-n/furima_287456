@@ -7,24 +7,22 @@
       <%= @item.name %>
     </h2>
     <div class='item-img-content'>
-      <%= image_tag @item.image ,class:"item-box-img" %>
+      <%= image_tag @item.image ,class:"item-box-img" if @item.image.attached? %>
       <%# 商品が売れている場合は、sold outの表示をしましょう。 %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
       <%# //商品が売れている場合は、sold outの表示をしましょう。 %>
     </div>
-  <% @items.eath do |item| %>
     <div class="item-price-box">
-      <span class="item-price"><%= @items.price %>
+      <span class="item-price"><%= @item.price %>
       </span>
       <span class="item-postage">
       </span>
     </div>
-  <%# end %>
 
     <%# ログインしているユーザと出品しているユーザが同一人物である時、商品の編集と削除を表示にしましょう%>
-  <% if user_signed_in? && current_user.id == item.user_id %>
+  <% if user_signed_in? && current_user.id == @item.user_id %>
     <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
     <p class='or-text'>or</p>
     <%= link_to '削除', "/items/#{@item.id}", method: :delete, class:'item-destroy' %>
@@ -76,7 +74,6 @@
       </div>
     </div>
   </div>
-
   <%# /商品の概要 %>
 
   <div class="comment-box">
