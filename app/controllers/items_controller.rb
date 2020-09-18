@@ -20,7 +20,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @item.user.nickname
   end
   private
 
