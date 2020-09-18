@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     @user.save
   end
 
+  def destroy
+    @user.delete
+  end
 
   private
 
