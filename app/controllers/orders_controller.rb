@@ -2,16 +2,18 @@ class OrdersController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    @order = Shipping.new
   end
 
   def create
-    @order = Shipping.new(price: order_params[:id])
+    @order = Shipping.new(order_params)
     if @order.valid?
       pay_item
       @order.save
       return redirect_to root_path
     else
-      render orders_path
+      @item = Item.find(params[:item_id])
+      render :index
     end
   end
 
@@ -21,14 +23,14 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.permit(:pistalcode, :prefecture_id, :city, :addresses, :building, :phone_number)
+    params.require(:shipping).permit(:taken, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number)
   end
 
   def pay_item
     Payjp.api_key = "sk_test_b6d8402ca02c3529c80a7fde"
     Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
-      card: order_params[:token],    # カードトークン
+      amount: item_params[:price],
+      card: order_params[:token],
       currency:'jpy'
     )
   end
