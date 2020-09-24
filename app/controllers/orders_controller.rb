@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 
   before_action :item_set, only[:index, :create]
+  before_action :move_to_index, expect: [:index]
 
   def index
     @order = Purchaseform.new
@@ -21,6 +22,12 @@ class OrdersController < ApplicationController
   private
   def item_set
     @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to new_user_registration_path
+    end
   end
 
   def order_params
