@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :purchaseform do
-
+    token           { 'aaa' }
     postal_code     { '123-4567' }
     prefecture_id   { '2' }
     city            { '横浜市横浜' }
