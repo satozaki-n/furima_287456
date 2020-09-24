@@ -50,13 +50,19 @@ RSpec.describe Purchaseform, type: :model do
         expect(@purchase.errors.full_messages).to include("Phone number can't be blank")
       end
 
-      it '電話番号が11桁以上では登録できない' do
+      it '電話番号が12桁以上では登録できない' do
         @purchase.phone_number = "123456789101"
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number is too long")
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid")
       end
 
-      
+      it '電話番号にハイフンが含まれていると登録できない' do
+        @purchase.phone_number = "1234-567-8910"
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid")
+      end
+
+
     end
   end
 end
