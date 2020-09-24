@@ -14,6 +14,7 @@
         <span>Sold Out!!</span>
       </div>
     </div>
+  <% else %>
     <div class="item-price-box">
       <span class="item-price"><%= @item.price %>
       </span>
@@ -26,8 +27,7 @@
         <p class='or-text'>or</p>
         <%= link_to '削除', "/items/#{@item.id}", method: :delete, class:'item-destroy' %>
       <% end %>
-  <% else %>
-      <% if user_signed_in? && current_user.id %>
+      <% if user_signed_in? && current_user.id != @item.user_id && @item.purchase = nil %>
         <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
       <% else @item.purchase %>
         <%= link_to '購入画面に進む', new_user_registration_path, class:"item-red-btn"%>
