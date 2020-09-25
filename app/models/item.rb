@@ -3,6 +3,7 @@ class Item < ApplicationRecord
 
   #空の投稿を保存できないようにする
   with_options presence: true do
+    validates :image
     validates :name
     validates :info
     validates :category_id
